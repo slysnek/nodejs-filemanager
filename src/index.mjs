@@ -3,9 +3,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { homedir } from 'os';
 import * as fs from 'fs';
+import read from './read.mjs';
+import ls from './ls.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-let currentSysDirectory = homedir();
+export let currentSysDirectory = homedir();
 
 const rline = createInterface({
   input: process.stdin,
@@ -28,46 +30,42 @@ const startManager = async () => {
       case 'up':
         console.log('Going up in directory...');
         currentSysDirectory = path.join(currentSysDirectory, '../');
-        console.log(currentSysDirectory);
+        process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
         break;
       case 'cd':
+        if (text.split('cd ')[1] === undefined) {
+          process.stdout.write(`Invalid input. If you want to change directory, please type cd location_name\n`);
+          break;
+        }
         console.log('Moving to new directory...');
         console.log(text);
-        currentSysDirectory = path.resolve(currentSysDirectory, text.split('cd ')[1])
-        console.log('current sys dir --- ' + currentSysDirectory);
-        break;
-      case 'ls':
-        fs.promises.readdir(currentSysDirectory).then((fileArray) => {
-          for (const file of fileArray) {
-            fs.stat(path.join(currentSysDirectory, file), (err, stats) => {
-              if (err) {
-                console.error(err);
-              } else {
-                if (stats.isFile()) {
-                  console.log(
-                    path.basename(file, path.extname(file)) +
-                      ' - ' +
-                      path.extname(file).slice(1) +
-                      ' - ' +
-                      (stats.size / 1024).toFixed(2) +
-                      'KB'
-                  );
-                } else{
-                  console.log(
-                    path.basename(file) +
-                      ' - ' + 'directory'
-                  );
-                }
-              }
-            });
+        const newDirectory = path.resolve(currentSysDirectory, text.split('cd ')[1]);
+        fs.access(newDirectory, (err) => {
+          if (err) {
+            console.log('There is no such directory! Please, try again');
+            process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
+          } else {
+            currentSysDirectory = newDirectory;
+            process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
+            process.stdout.write('Enter your command: ');
           }
         });
         break;
+      case 'ls':
+        ls();
+        break;
+      case 'cat':
+        console.log('ENTERED TEXT ' + text);
+        if (text.split('cat ')[1] === undefined) {
+          process.stdout.write(`Invalid input. If you want to read directory, please type cat filename\n`);
+          break;
+        }
+        read(text.split('cat ')[1]);
+        break;
       default:
-        console.log(text);
-        console.log(text.startsWith('cd'));
+        process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
         console.log('Invalid input');
-        console.log('Enter again: ');
+        console.log('Try again: ');
         break;
     }
   });
