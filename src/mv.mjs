@@ -33,6 +33,7 @@ const mv = async (fileName, newDirectory) => {
                 process.stdout.write(`Something has gone wrong and file cannot be deleted!\n`);
               }
               console.log('File was moved!');
+              process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
             })
           );
 
