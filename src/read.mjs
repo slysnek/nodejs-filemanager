@@ -10,7 +10,7 @@ const filePath = path.join(__dirname, 'files/fileToRead.txt');
 const read = async (filePath) => {
   const resolvedDirectory = path.resolve(currentSysDirectory, filePath);
   console.log('resolved file path --- ' + resolvedDirectory);
-  fs.open(resolvedDirectory, (err) => {
+  fs.readFile(resolvedDirectory, (err) => {
     if (err) {
       console.log('There is no such a file! Maybe you forgot to add the extension? (example.txt)');
       process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
@@ -18,7 +18,7 @@ const read = async (filePath) => {
       process.stdout.write(`You are reading ${currentSysDirectory}\n`);
       const readStream = createReadStream(resolvedDirectory, 'utf-8');
       readStream.on('error', (error) => console.error(`error: ${error}`));
-      readStream.on('data', (data) => process.stdout.write(data));
+      readStream.on('data', (data) => process.stdout.write(data + '\n'));
     }
   });
 };
