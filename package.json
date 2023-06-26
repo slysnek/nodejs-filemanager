@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-filemanager",
+  "version": "1.0.0",
+  "description": "NodeJS file manager",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slysnek/nodejs-filemanager.git"
+  },
+  "author": "slysnek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slysnek/nodejs-filemanager/issues"
+  },
+  "homepage": "https://github.com/slysnek/nodejs-filemanager#readme"
+}
