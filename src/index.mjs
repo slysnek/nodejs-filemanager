@@ -7,6 +7,7 @@ import read from './read.mjs';
 import ls from './ls.mjs';
 import add from './add.mjs';
 import rn from './rn.mjs';
+import cp from './cp.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export let currentSysDirectory = homedir();
@@ -68,15 +69,22 @@ const startManager = async () => {
           process.stdout.write(`Invalid input. If you want to add new file, please type add filename\n`);
           break;
         }
-        add(text.split('add ')[1])
-       break;
-       case 'rn':
+        add(text.split('add ')[1]);
+        break;
+      case 'rn':
         if (text.split(' ')[1] === undefined || text.split(' ')[2] === undefined) {
           process.stdout.write(`Invalid input. If you want to rename new file, please type rn filename newname\n`);
           break;
         }
-        rn(text.split(' ')[1], text.split(' ')[2])
-       break;
+        rn(text.split(' ')[1], text.split(' ')[2]);
+        break;
+        case 'cp':
+          if (text.split(' ')[1] === undefined || text.split(' ')[2] === undefined) {
+            process.stdout.write(`Invalid input. If you want to copy a file, please type copy filename dirname\n`);
+            break;
+          }
+          cp(text.split(' ')[1], text.split(' ')[2]);
+          break;
       default:
         process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
         console.log('Invalid input');
