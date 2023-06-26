@@ -2,9 +2,9 @@
   "name": "nodejs-filemanager",
   "version": "1.0.0",
   "description": "NodeJS file manager",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.mjs"
   },
   "repository": {
     "type": "git",
