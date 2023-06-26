@@ -1,11 +1,7 @@
 import { createReadStream } from 'fs';
 import path from 'path';
 import * as fs from 'fs';
-import { fileURLToPath } from 'url';
 import { currentSysDirectory } from './index.mjs';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const filePath = path.join(__dirname, 'files/fileToRead.txt');
 
 const read = async (filePath) => {
   const resolvedDirectory = path.resolve(currentSysDirectory, filePath);

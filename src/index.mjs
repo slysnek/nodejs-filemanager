@@ -5,6 +5,7 @@ import { homedir } from 'os';
 import * as fs from 'fs';
 import read from './read.mjs';
 import ls from './ls.mjs';
+import add from './add.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export let currentSysDirectory = homedir();
@@ -61,6 +62,13 @@ const startManager = async () => {
         }
         read(text.split('cat ')[1]);
         break;
+      case 'add':
+        if (text.split('add ')[1] === undefined) {
+          process.stdout.write(`Invalid input. If you want to add new file, please type add filename\n`);
+          break;
+        }
+        add(text.split('add ')[1])
+       break;
       default:
         process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
         console.log('Invalid input');
