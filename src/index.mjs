@@ -9,6 +9,7 @@ import add from './add.mjs';
 import rn from './rn.mjs';
 import cp from './cp.mjs';
 import mv from './mv.mjs';
+import del from './del.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export let currentSysDirectory = homedir();
@@ -92,6 +93,13 @@ const startManager = async () => {
               break;
             }
             mv(text.split(' ')[1], text.split(' ')[2]);
+            break;
+          case 'del':
+            if (text.split(' ')[1] === undefined) {
+              process.stdout.write(`Invalid input. If you want to delete a file, please type del filename filepath\n`);
+              break;
+            }
+            del(text.split(' ')[1]);
             break;
       default:
         process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
