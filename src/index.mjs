@@ -55,7 +55,6 @@ const startManager = async () => {
         ls();
         break;
       case 'cat':
-        console.log('ENTERED TEXT ' + text);
         if (text.split('cat ')[1] === undefined) {
           process.stdout.write(`Invalid input. If you want to read directory, please type cat filename\n`);
           break;

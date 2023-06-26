@@ -9,7 +9,6 @@ const filePath = path.join(__dirname, 'files/fileToRead.txt');
 
 const read = async (filePath) => {
   const resolvedDirectory = path.resolve(currentSysDirectory, filePath);
-  console.log('resolved file path --- ' + resolvedDirectory);
   fs.readFile(resolvedDirectory, (err) => {
     if (err) {
       console.log('There is no such a file! Maybe you forgot to add the extension? (example.txt)');
