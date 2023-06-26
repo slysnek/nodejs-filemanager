@@ -15,7 +15,7 @@ const ls = async () => {
       } else {
         if (stats.isFile()) {
           dataArray.push(
-            path.basename(file, path.extname(file)) +
+            path.basename(file, path.extname(file)) + path.extname(file) +
             ' - ' + 'file')
         } else {
           dataArray.push(path.basename(file) + ' - ' + 'directory');
