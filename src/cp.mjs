@@ -12,7 +12,6 @@ const cp = async (fileName, newDirectory) => {
       process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
     } else {
       fs.access(path.join(resolvedNewDirectory, '..'), (err) => {
-        console.log(resolvedNewDirectory);
         if (err) {
           console.log('There is no such a directory to copy the file to!');
           process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
