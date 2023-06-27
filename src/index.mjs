@@ -12,6 +12,7 @@ import mv from './mv.mjs';
 import del from './del.mjs';
 import ops from './ops.mjs';
 import { hash } from './hash.mjs';
+import brotli from './brotli.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 export let currentSysDirectory = homedir();
@@ -121,6 +122,20 @@ const startManager = async () => {
         }
         hash(text.split(' ')[1]);
         break;
+        case 'compress':
+          if (text.split(' ')[1] === undefined || text.split(' ')[2] === undefined) {
+            process.stdout.write(`Invalid input. If you want to compress a file, please type compress filename filedestination\n`);
+            break;
+          }
+          brotli(text.split(' ')[1], text.split(' ')[2]);
+          break;
+        case 'decompress':
+          if (text.split(' ')[1] === undefined || text.split(' ')[2] === undefined) {
+            process.stdout.write(`Invalid input. If you want to decompress a file, please type decompress filename filedestination\n`);
+            break;
+          }
+          brotli(text.split(' ')[1], text.split(' ')[2]);
+          break;
       default:
         process.stdout.write(`You are currently in ${currentSysDirectory}\n`);
         console.log('Invalid input');
