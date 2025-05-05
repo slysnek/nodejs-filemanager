@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import read from './read.mjs';
 import ls from './ls.mjs';
 import add from './add.mjs';
+import mkdir from './mkdir.mjs';
 import rn from './rn.mjs';
 import cp from './cp.mjs';
 import mv from './mv.mjs';
@@ -76,6 +77,13 @@ const startManager = async () => {
         }
         add(text.split('add ')[1]);
         break;
+      case 'mkdir':
+        if (text.split('mkdir ')[1] === undefined) {
+          process.stdout.write(`Invalid input. If you want to create new directory, please type mkdir filename\n`);
+          break;
+        }
+        mkdir(text.split('mkdir ')[1]);
+        break;
       case 'rn':
         if (text.split(' ')[1] === undefined || text.split(' ')[2] === undefined) {
           process.stdout.write(`Invalid input. If you want to rename new file, please type rn filename newname\n`);
@@ -144,7 +152,7 @@ const startManager = async () => {
     }
   });
 
-  process.on('exit', () => process.stdout.write(`\nThank you for using File Manager, ${username}, goodbye!`));
+  process.on('exit', () => process.stdout.write(`\nThank you for using File Manager, ${username}, goodbye!\n`));
 };
 
 startManager();
